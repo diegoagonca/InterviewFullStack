@@ -19,18 +19,16 @@ export class Nodes extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(this.state.expandedNodeURL !== null){
-      console.log("****************++++++++++++++++ componentDidUpdate() >> this.state.nodeSelect = ", this.state.nodeSelect);
-      actions.handleGetDataNodeBlock(this.state.nodeSelect);
+    const { actions } = this.props;
+    if(prevState.expandedNodeURL != this.state.expandedNodeURL){
+      if(this.state.expandedNodeURL !== null){
+        actions.handleGetDataNodeBlock(this.state.nodeSelect);
+      }
     }
   }
 
   toggleNodeExpanded(node) {
     const { online, url } = node;
-    const { actions } = this.props;
-
-    console.log("******************______________ toggleNodeExpanded(node) = ", node);
-
     if(online){
       this.setState({
         expandedNodeURL: url === this.state.expandedNodeURL ? null : url,

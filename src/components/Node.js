@@ -15,11 +15,14 @@ import Status from "./Status";
 const Node = ({ node, expanded, toggleNodeExpanded }) => {
   const classes = useStyles();
   const { dataBlock } = node;
-  // const [localState, setLocalState] = useState({ dataBlock })
+  const [localState, setLocalState] = useState([])
 
-  console.log("**********1 components/Node.js >> node = ", node);
-  console.log("**********2 components/Node.js >> dataBlock = ", dataBlock);
-
+  useEffect(() => {
+    if(dataBlock){
+      let data = dataBlock.data
+      setLocalState({data});
+    }
+  }, [dataBlock]);
   return (
     <ExpansionPanel
       elevation={3}
@@ -52,19 +55,14 @@ const Node = ({ node, expanded, toggleNodeExpanded }) => {
         </Box>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <Typography>Blocks go here</Typography>
-
-        {console.log("***************3  node.js >> dataBlock = ", dataBlock)}
-
-        {/* {(dataBlock) ?
-          (<div>
-            {
-              dataBlock.data.map((block)=>{
-                <li>{block}</li>
-              })
-            }
-          </div>) : null
-        } */}
+        <Typography>Blocks:</Typography>
+        {(localState.data) ?
+            <ul>
+              {localState.data.map(({attributes:{data}, id}) => (
+                <li key={id}> {data} </li>
+              ))}
+            </ul>
+         : "Loading..." }
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

@@ -32,26 +32,23 @@ const checkNodeDataBlocks = (node , dataBlock) => {
   };
 };
 
-export function callApiBlock(node) {
-
-  console.log("****************----------- callApiBlock(node) = ", node);
-
+export function callApiBlock(nodeSelect) {
   return async (dispatch) => {
     try {
-      const resDataBlock = await fetch(`${node.url}/api/v1/blocks`);
+      const resDataBlock = await fetch(`${nodeSelect.url}/api/v1/blocks`);
       if(resDataBlock.status >= 400) {
-        dispatch(checkNodeStatusFailure(node));
+        dispatch(checkNodeStatusFailure(nodeSelect));
       }
       const dataBlock = await resDataBlock.json();
-      dispatch(checkNodeDataBlocks(node, dataBlock));
+      dispatch(checkNodeDataBlocks(nodeSelect, dataBlock));
     } catch (err) {
-      dispatch(checkNodeStatusFailure(node));
+      dispatch(checkNodeStatusFailure(nodeSelect));
     }
   }
 };
 
-export function handleGetDataNodeBlock(node) {
-  return (dispatch) => dispatch(callApiBlock(node));
+export function handleGetDataNodeBlock(nodeSelect) {
+  return (dispatch) => dispatch(callApiBlock(nodeSelect));
 }
 
 export function checkNodeStatuses(list) { //Call from src\containers\Nodes.js
