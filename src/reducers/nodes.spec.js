@@ -41,9 +41,30 @@ describe('Reducers::Nodes', () => {
         nodeB
       ]
     };
+    expect(reducer(appState, action)).toEqual(expected);
+  });
+
+  // Test get data block API
+  it('should handle CHECK_GET_NODE_DATA_BLOCKS', () => {
+    const appState = {
+      list: [nodeA, nodeB]
+    };
+    const action = { type: ActionTypes.CHECK_GET_NODE_DATA_BLOCKS, node: nodeA, dataBlock: {} };
+    const expected = {
+      list: [
+        {
+          ...nodeA,
+          online: true,
+          loading: false,
+          dataBlock: {}
+        },
+        nodeB
+      ]
+    };
 
     expect(reducer(appState, action)).toEqual(expected);
   });
+
 
   it('should handle CHECK_NODE_STATUS_SUCCESS', () => {
     const appState = {

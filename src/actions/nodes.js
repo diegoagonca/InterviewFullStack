@@ -24,7 +24,7 @@ const checkNodeStatusFailure = node => {
 };
 
 //Action reducer to get data bloks
-const checkNodeDataBlocks = (node , dataBlock) => {
+const checkNodeDataBlocks = (node, dataBlock) => {
   return {
     type: types.CHECK_GET_NODE_DATA_BLOCKS,
     node,
@@ -35,6 +35,7 @@ const checkNodeDataBlocks = (node , dataBlock) => {
 export function callApiBlock(nodeSelect) {
   return async (dispatch) => {
     try {
+      dispatch({type: "CHECK_GET_NODE_DATA_BLOCKS", nodeSelect: nodeSelect});
       const resDataBlock = await fetch(`${nodeSelect.url}/api/v1/blocks`);
       if(resDataBlock.status >= 400) {
         dispatch(checkNodeStatusFailure(nodeSelect));
