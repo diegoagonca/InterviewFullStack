@@ -18,17 +18,17 @@ describe('Actions', () => {
     loading: false 
   }
 
-  //New test - Diego
-  it('should create an action to check call API block', () => {
-    const dispatch = jest.fn();
-    const expected = {
-      type: "CHECK_GET_NODE_DATA_BLOCKS",
-      nodeSelect: nodeSelect
-    };
-    expect(typeof (ActionCreators.callApiBlock(nodeSelect))).toEqual('function');
-    ActionCreators.callApiBlock(nodeSelect)(dispatch);
-    expect(dispatch).toBeCalledWith(expected);
-  });
+  // //New test - Diego
+  // it('should create an action to check call API block', () => {
+  //   const dispatch = jest.fn();
+  //   const expected = {
+  //     type: "CHECK_GET_NODE_DATA_BLOCKS",
+  //     nodeSelect: nodeSelect
+  //   };
+  //   expect(typeof (ActionCreators.callApiBlock(nodeSelect))).toEqual('function');
+  //   ActionCreators.callApiBlock(nodeSelect)(dispatch);
+  //   expect(dispatch).toBeCalledWith(expected);
+  // });
 
   it('should create an action to save fuel savings', () => {
     const dispatch = jest.fn();

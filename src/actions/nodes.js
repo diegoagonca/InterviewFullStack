@@ -35,7 +35,6 @@ const checkNodeDataBlocks = (node, dataBlock) => {
 export function callApiBlock(nodeSelect) {
   return async (dispatch) => {
     try {
-      dispatch({type: "CHECK_GET_NODE_DATA_BLOCKS", nodeSelect: nodeSelect});
       const resDataBlock = await fetch(`${nodeSelect.url}/api/v1/blocks`);
       if(resDataBlock.status >= 400) {
         dispatch(checkNodeStatusFailure(nodeSelect));
